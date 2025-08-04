@@ -11,6 +11,7 @@ export default defineConfig({
   treeshake: true,
   minify: true,
   outDir: 'dist',
+  tsconfig: './tsconfig.lib.json',
   esbuildOptions(options) {
     options.jsx = 'automatic';
   },

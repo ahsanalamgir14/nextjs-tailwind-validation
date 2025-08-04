@@ -17,7 +17,7 @@ export const useFormContext = () => {
   return context;
 };
 
-export interface ValidatedFormProps extends UseFormOptions {
+export interface ValidatedFormProps extends Omit<UseFormOptions, 'onSubmit'> {
   children: ReactNode;
   className?: string;
   onSubmit?: (e: React.FormEvent) => void;
@@ -46,31 +46,31 @@ export const ValidatedForm: React.FC<ValidatedFormProps> = ({
     ${className}
   `;
 
-  // Clone children and inject form prop into ValidatedInput components
-  const childrenWithForm = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
-      // If it's a ValidatedInput, inject the form prop
-      if (child.type === ValidatedInput || 
-          (typeof child.type === 'function' && child.type.displayName === 'ValidatedInput')) {
-        return React.cloneElement(child, { form } as any);
-      }
-      
-      // Recursively process nested children
-      if (child.props.children) {
-        const processedChildren = React.Children.map(child.props.children, (nestedChild) => {
-          if (React.isValidElement(nestedChild)) {
-            if (nestedChild.type === ValidatedInput || 
-                (typeof nestedChild.type === 'function' && nestedChild.type.displayName === 'ValidatedInput')) {
-              return React.cloneElement(nestedChild, { form } as any);
+            // Clone children and inject form prop into ValidatedInput components
+          const childrenWithForm = React.Children.map(children, (child) => {
+            if (React.isValidElement(child)) {
+              // If it's a ValidatedInput, inject the form prop
+              if (child.type === ValidatedInput ||
+                  (typeof child.type === 'function' && (child.type as any).displayName === 'ValidatedInput')) {
+                return React.cloneElement(child, { form } as any);
+              }
+
+              // Recursively process nested children
+              if ((child.props as any).children) {
+                const processedChildren = React.Children.map((child.props as any).children, (nestedChild) => {
+                  if (React.isValidElement(nestedChild)) {
+                    if (nestedChild.type === ValidatedInput ||
+                        (typeof nestedChild.type === 'function' && (nestedChild.type as any).displayName === 'ValidatedInput')) {
+                      return React.cloneElement(nestedChild, { form } as any);
+                    }
+                  }
+                  return nestedChild;
+                });
+                return React.cloneElement(child, {}, processedChildren);
+              }
             }
-          }
-          return nestedChild;
-        });
-        return React.cloneElement(child, {}, processedChildren);
-      }
-    }
-    return child;
-  });
+            return child;
+          });
 
   return (
     <FormContext.Provider value={form}>

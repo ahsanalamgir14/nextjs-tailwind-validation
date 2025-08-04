@@ -152,9 +152,7 @@ export const ValidatedInput = forwardRef<HTMLInputElement | HTMLTextAreaElement,
     `;
 
     const renderInput = () => {
-      const inputProps = {
-        ref,
-        type,
+      const baseProps = {
         name,
         value,
         placeholder,
@@ -167,10 +165,10 @@ export const ValidatedInput = forwardRef<HTMLInputElement | HTMLTextAreaElement,
       };
 
       if (type === 'textarea') {
-        return <textarea {...inputProps} rows={4} />;
+        return <textarea {...baseProps} ref={ref as React.Ref<HTMLTextAreaElement>} rows={4} />;
       }
 
-      return <input {...inputProps} />;
+      return <input {...baseProps} ref={ref as React.Ref<HTMLInputElement>} type={type} />;
     };
 
     return (
