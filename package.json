@@ -1,12 +1,68 @@
 {
-  "name": "nextjs-tailwind-validation",
-  "version": "0.1.0",
-  "private": true,
+  "name": "nextjs-validation-tailwind",
+  "version": "1.0.0",
+  "description": "A comprehensive validation library for Next.js with Tailwind CSS styling",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./components": {
+      "import": "./dist/components/index.mjs",
+      "require": "./dist/components/index.js",
+      "types": "./dist/components/index.d.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks/index.mjs",
+      "require": "./dist/hooks/index.js",
+      "types": "./dist/hooks/index.d.ts"
+    },
+    "./utils": {
+      "import": "./dist/utils/index.mjs",
+      "require": "./dist/utils/index.js",
+      "types": "./dist/utils/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "build": "tsup",
+    "build:lib": "tsup src/lib/index.ts --format cjs,esm --dts --external react --external react-dom --external next",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepublishOnly": "npm run build:lib"
+  },
+  "keywords": [
+    "nextjs",
+    "validation",
+    "tailwind",
+    "react",
+    "form-validation",
+    "typescript",
+    "hooks"
+  ],
+  "author": "Ahsan Alamgir",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahsanalamgir14/nextjs-tailwind-validation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ahsanalamgir14/nextjs-tailwind-validation/issues"
+  },
+  "homepage": "https://github.com/ahsanalamgir14/nextjs-tailwind-validation#readme",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "next": ">=13.0.0"
   },
   "dependencies": {
     "react": "19.1.0",
@@ -22,6 +78,7 @@
     "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.4.5",
-    "@eslint/eslintrc": "^3"
+    "@eslint/eslintrc": "^3",
+    "tsup": "^8.0.0"
   }
 }
