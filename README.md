@@ -1,6 +1,16 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
+<div align="center">
+  <img src="docs/images/banner.svg" alt="NextJS Validation Tailwind Banner" width="100%">
+  
+  <h1>NextJS Validation Tailwind</h1>
+  <p>A comprehensive validation library for Next.js applications with beautiful Tailwind CSS styling. Built with TypeScript and React hooks for optimal developer experience.</p>
+  
+  <div>
+    <img src="https://img.shields.io/npm/v/nextjs-validation-tailwind" alt="npm version">
+    <img src="https://img.shields.io/npm/dm/nextjs-validation-tailwind" alt="npm downloads">
+    <img src="https://img.shields.io/github/stars/ahsanalamgir14/nextjs-tailwind-validation" alt="GitHub stars">
+    <img src="https://img.shields.io/github/license/ahsanalamgir14/nextjs-tailwind-validation" alt="License">
+  </div>
+</div>
 
 First, run the development server:
 
